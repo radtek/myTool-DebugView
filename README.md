@@ -13,11 +13,11 @@ DebugView是一款方便分析网络程序、硬件通信和组合通信查看�
 
     send:      1 
     
-    recve:     2
+    recv:     2
     
     WriteFile: 3 
     
     ReadFile:  4
     
 
-作者：http://www.xuwu.org/debugview/
+详情：http://www.xuwu.org/debugview/
