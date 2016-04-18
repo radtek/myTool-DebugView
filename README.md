@@ -6,8 +6,9 @@ packView是一款方便分析网络程序、硬件通信和组合通信查看发
 
   HWND m_hwnd = ::FindWindow(NULL, \"DebugView\");  
   .... 
+  
   ::SendMessage(m_hwnd, WM_COPYDATA, NULL, (LPARAM)&data); 
-
+  
 命令：
     send:      1 
     recve:     2
