@@ -36,6 +36,7 @@ BEGIN_MESSAGE_MAP(CFilterDLG, CDialogEx)
     ON_BN_CLICKED(IDOK, &CFilterDLG::OnBnClickedOk)
     ON_BN_CLICKED(IDC_BUTTON2, &CFilterDLG::OnBnClickedButton2)
     ON_BN_CLICKED(IDC_BUTTON3, &CFilterDLG::OnBnClickedButton3)
+    ON_BN_CLICKED(IDC_BUTTON4, &CFilterDLG::OnBnClickedButton4)
 END_MESSAGE_MAP()
 
 
@@ -306,5 +307,81 @@ void CFilterDLG::OnBnClickedButton3()
     {
         m_list.SetSelectionMark(i);
         OnBnClickedButton2();
+    }
+}
+
+
+void CFilterDLG::OnBnClickedButton4()
+{
+    static TCHAR BASED_CODE szFilter[] = _T("Filter Files (*.dFilter)|*.dFilter|")
+        _T("All Files (*.*)|*.*||");
+
+    CFileDialog FileDlg(FALSE, L"", L"export", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, szFilter);
+    if (FileDlg.DoModal() == IDOK)
+    { 
+        exportFilter(FileDlg.GetPathName());
+    }
+}
+
+void CFilterDLG::exportFilter(CString path)
+{
+    CFile file;
+
+    if (file.Open(path, CFile::modeReadWrite | CFile::typeBinary | CFile::modeCreate) == FALSE)
+    {
+        MessageBox(L"导出失败！请确保有读写文件权限");
+        return;
+    }
+
+    writeHead(file);
+
+    writeData(file);
+
+    MessageBox(L"过滤设置导出成功!");
+    file.Close();
+}
+
+void CFilterDLG::writeHead(CFile& file)
+{
+    char *head = "xuwu.org";
+    file.Write(head, strlen(head) + 1); 
+}
+
+//下面是导出导入文件格式
+struct tagIE
+{
+    char str[9]; //xuwu.org\0
+    int count;
+    int sub_count;
+    int sub_post;
+    int sub_data;
+};
+
+void CFilterDLG::writeData(CFile& file)
+{ 
+    //写入表数量
+    int count = m_Tab->size();
+    file.Write((LPVOID)&count, sizeof(int));
+
+    filterTab::iterator it = m_Tab->begin();
+    for (it; it != m_Tab->end(); it++)
+    {
+        writeSubData(file, it->first, it->second);
+    }
+}
+
+void CFilterDLG::writeSubData(CFile& file, int row, filterCol* data)
+{
+    int tmp = row;
+    file.Write((LPVOID)&tmp, sizeof(int));
+
+    filterCol::iterator it = data->begin();
+    for (it; it != data->end(); it++)
+    { 
+        tmp = (*it)->m_col;
+        file.Write((LPVOID)&tmp, sizeof(int));
+         
+        tmp = (int)(*it)->m_data;
+        file.Write((LPVOID)&tmp, sizeof(int));
     }
 }

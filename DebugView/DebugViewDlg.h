@@ -61,7 +61,13 @@ protected:
      
     //打开过滤器
     afx_msg void OnBnClickedButton3();
-	DECLARE_MESSAGE_MAP()
+    
+    //有关消息
+    afx_msg void About();
+	
+    //注入DLL
+    afx_msg void OnBnClickedButton1();
+    DECLARE_MESSAGE_MAP()
 
     void initList();
      
@@ -88,7 +94,5 @@ private:
 
     CData m_data;   
 
-    CFilter m_filter;
-public:
-    afx_msg void About();
+    CFilter m_filter; 
 };

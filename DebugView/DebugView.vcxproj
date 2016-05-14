@@ -103,8 +103,11 @@
   <ItemGroup>
     <ClInclude Include="CFilterDLG.h" />
     <ClInclude Include="CFiltering.h" />
+    <ClInclude Include="CInjection.h" />
+    <ClInclude Include="CInjectionDLG.h" />
     <ClInclude Include="CMyStatic.h" />
     <ClInclude Include="CNewEdit.h" />
+    <ClInclude Include="CProcessInfo.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="DebugView.h" />
     <ClInclude Include="DebugViewDlg.h" />
@@ -116,8 +119,11 @@
   <ItemGroup>
     <ClCompile Include="CFilterDLG.cpp" />
     <ClCompile Include="CFiltering.cpp" />
+    <ClCompile Include="CInjection.cpp" />
+    <ClCompile Include="CInjectionDLG.cpp" />
     <ClCompile Include="CMyStatic.cpp" />
     <ClCompile Include="CNewEdit.cpp" />
+    <ClCompile Include="CProcessInfo.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="DebugView.cpp" />
     <ClCompile Include="DebugViewDlg.cpp" />

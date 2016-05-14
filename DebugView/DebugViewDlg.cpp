@@ -7,6 +7,7 @@
 #include "DebugViewDlg.h"
 #include "afxdialogex.h" 
 #include "CMyStatic.h" 
+#include "CInjectionDLG.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -74,7 +75,7 @@ BOOL CAboutDlg::OnInitDialog()
 
     CString txt;
     txt.Format(
-        L"packView是一款方便分析网络程序、硬件通信和组合通信查看发包信息的一款工具。 \r\n\r\n"
+        L"DebugView是一款方便分析网络程序、硬件通信和组合通信查看发包信息的一款工具。 \r\n\r\n"
         L"帮助分析人员理顺发(收)包顺序流程，便于逆向分析或者还原发包流程。 \r\n\r\n"
         L"这款工具不是万能的，你需要自行找到发送点并且自己进行做HOOK。 \r\n\r\n"
         L"    HWND m_hwnd = ::FindWindow(NULL, \"DebugView\");  \r\n"
@@ -163,6 +164,7 @@ BEGIN_MESSAGE_MAP(CDebugViewDlg, CDialogEx)
     ON_BN_CLICKED(IDC_BUTTON6, &CDebugViewDlg::OnBnClickedButton6)
     ON_BN_CLICKED(IDC_BUTTON3, &CDebugViewDlg::OnBnClickedButton3)
     ON_COMMAND(ID_32771, &CDebugViewDlg::About) 
+    ON_BN_CLICKED(IDC_BUTTON1, &CDebugViewDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -561,4 +563,11 @@ void CDebugViewDlg::About()
     CAboutDlg about;
 
     about.DoModal();
+}
+
+void CDebugViewDlg::OnBnClickedButton1()
+{
+    CInjectionDLG dlg;
+
+    dlg.DoModal();
 }

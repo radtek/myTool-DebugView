@@ -6,6 +6,7 @@
 #include "FilterHead.h"
 
 // CFilterDLG 对话框
+  
 
 class CFilterDLG : public CDialogEx
 {
@@ -43,6 +44,8 @@ protected:
     //清空过滤器 
     afx_msg void OnBnClickedButton3();
 	
+    //导出设置
+    afx_msg void OnBnClickedButton4();
     DECLARE_MESSAGE_MAP() 
 
     void initList(); 
@@ -67,10 +70,19 @@ protected:
     int clearListRow();
 
     void clearTabRow(int row);
-      
+
+    //导出过滤设置
+    void exportFilter(CString path);
+    
+    void writeHead(CFile& file);
+
+    void writeData(CFile& file);
+
+    void writeSubData(CFile& file, int row, filterCol* data);
+
 private:
     int m_Row;
     int m_Col;
 
-    filterTab *m_Tab;  
+    filterTab *m_Tab;   
 };
